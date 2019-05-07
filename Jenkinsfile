@@ -1,7 +1,7 @@
 import groovy.json.*
 
 def hockey_app_id = "2439bd963ea84cfca061e8ca1c101d27"
-def app_id = 910761
+def app_id = 910760
 
 pipeline {
   agent any
@@ -29,19 +29,20 @@ def hockeyCheckId(String hockeyAppId, appId){
   proc.waitFor()              
 
   println "Process exit code: ${proc.exitValue()}"
-  //println "Std Err: ${proc.err.text}"
-  //println "Std Out: ${proc.in.text}" 
-
-  def json = new JsonSlurper().parseText(proc.in.text)
-
-  println json.results.size()
-  def remote_app_id = json[0].app_id
-  if(remote_app_id == appId){
-    println "Match found"
+  if(proc.exitValue() != 0){
+    def json = new JsonSlurper().parseText(proc.in.text)
+    def remote_app_id = json[0].app_id
+    if(remote_app_id == appId){
+      println "Match found"
+    }
+    else {
+      error('No match found.')
+    }
   }
   else {
-     error('No match found.')
+    error('Hockey App Id checker returned an error.')
   }
+  
 
   println(json[0].app_id)
 }
