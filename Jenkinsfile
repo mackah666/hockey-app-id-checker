@@ -1,7 +1,7 @@
 import groovy.json.*
 
 def hockey_app_id = "2439bd963ea84cfca061e8ca1c101d27"
-def app_id = "910760"
+def app_id = 910760
 
 pipeline {
   agent any
@@ -23,7 +23,7 @@ pipeline {
 }
 
 
-def hockeyCheckId(String hockeyAppId, String appId){
+def hockeyCheckId(String hockeyAppId, appId){
   def command = "${env.WORKSPACE}/check_hockeyId.sh ${hockeyAppId}"
   def proc = command.execute()
   proc.waitFor()              
@@ -35,7 +35,8 @@ def hockeyCheckId(String hockeyAppId, String appId){
   def json = new JsonSlurper().parseText(proc.in.text)
 
   println json.results.size()
-  if(json[0].app_id == "${appId}"){
+  def remote_app_id = json[0].app_id
+  if(remote_app_id == appId){
     println "Match found"
   }
   else {
