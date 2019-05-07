@@ -23,7 +23,7 @@ pipeline {
 
 
 def hockeyCheckId(String hockeyAppId){
-  def command = "./curl_command_json.sh ${hockeyAppId}"
+  def command = "./check_HockeyId.sh ${hockeyAppId}"
   def proc = command.execute()
   proc.waitFor()              
 
