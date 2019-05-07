@@ -30,15 +30,16 @@ def hockeyCheckId(String hockeyAppId, appId){
 
   println "Process exit code: ${proc.exitValue()}"
   def exitcode = proc.exitValue()
-    def json = new JsonSlurper().parseText(proc.in.text)
-    def remote_app_id = json[0].app_id
-    if(remote_app_id == appId){
-      println "Match found"
-    }
-    else {
-      error('No match found.')
-    }
+  def json = new JsonSlurper().parseText(proc.in.text)
+  def remote_app_id = json[0].app_id
+  
+  if(remote_app_id == appId){
+    println "Match found"
   }
+  else {
+    error('No match found.')
+  }
+
 
   
 
