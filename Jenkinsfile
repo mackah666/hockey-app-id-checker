@@ -15,10 +15,27 @@ pipeline {
     }  
     stage('Run Checker') {
       steps {
-        echo 'Copy bundled game content'
+        hockeyCheckId(id)
       }
     }
   }
+}
+
+
+def hockeyCheckId(String hockeyAppId){
+  def command = "./curl_command_json.sh ${hockeyAppId}"
+  def proc = command.execute()
+  proc.waitFor()              
+
+  println "Process exit code: ${proc.exitValue()}"
+  //println "Std Err: ${proc.err.text}"
+  //println "Std Out: ${proc.in.text}" 
+
+  def json = new JsonSlurper().parseText(proc.in.text)
+
+  println json.results.size()
+
+  println(json[0].app_id)
 }
 
 
