@@ -40,7 +40,7 @@ def hockeyCheckId(String hockeyAppId, appId){
     println "Match found"
   }
   else {
-    error: Error signal
+     error('No match found.')
   }
 
   println(json[0].app_id)
