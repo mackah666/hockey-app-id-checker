@@ -1,7 +1,7 @@
 import groovy.json.*
 
 def hockey_app_id = "2439bd963ea84cfca061e8ca1c101d27"
-def app_id = 910760
+def app_id = 910761
 
 pipeline {
   agent any
@@ -40,7 +40,7 @@ def hockeyCheckId(String hockeyAppId, appId){
     println "Match found"
   }
   else {
-    println "No match found"
+    error: "No match found"
   }
 
   println(json[0].app_id)
