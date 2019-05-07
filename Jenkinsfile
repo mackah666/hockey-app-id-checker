@@ -35,7 +35,7 @@ def hockeyCheckId(String hockeyAppId, String appId){
   def json = new JsonSlurper().parseText(proc.in.text)
 
   println json.results.size()
-  if(json[0].app_id == ${appId}){
+  if(json[0].app_id == "${appId}"){
     println "Match found"
   }
   else {
