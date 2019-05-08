@@ -33,7 +33,7 @@ pipeline {
       steps {
         //hockeyCheckId(hockey_app_id, app_id)
         script{
-          androidBuildTypes.each { 
+          hockeyApps.each { 
             println "$it.id: $it.hockeyAppId" 
             hockeyCheckId($it.hockeyAppId, $it.id)
           }
