@@ -38,7 +38,7 @@ pipeline {
           // hockeyApps.each { 
           //   hockeyCheckId($it.hockeyAppId, $it.id)
           // }
-          hockeyCheck(hockeyApps)
+          hockeyCheck(hockeyApps, app_name)
         }
       }
     }
@@ -70,7 +70,7 @@ def hockeyCheckId(String hockeyAppId, appId){
   println(json[0].app_id)
 }
 
-def hockeyCheck(hockeyApps){
+def hockeyCheck(hockeyApps,appName){
   hockeyApps.each { 
     def command = "${env.WORKSPACE}/check_hockeyId.sh ${it.hockeyAppId}"
     def proc = command.execute()
@@ -81,7 +81,7 @@ def hockeyCheck(hockeyApps){
     def json = new JsonSlurper().parseText(proc.in.text)
     def remote_app_id = json[0].app_id
     
-    if(remote_app_id == it.id && json[0].title.contains(app_name)){
+    if(remote_app_id == it.id && json[0].title.contains(appName)){
       println "Match found"
       println(json[0].app_id)
       println(json[0].title)
