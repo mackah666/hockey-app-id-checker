@@ -70,7 +70,7 @@ def hockeyCheckId(String hockeyAppId, appId){
 
 def hockeyCheck(hockeyApps){
   hockeyApps.each { 
-    def command = "${env.WORKSPACE}/check_hockeyId.sh $it.hockeyAppId"
+    def command = "${env.WORKSPACE}/check_hockeyId.sh ${it.hockeyAppId}"
     def proc = command.execute()
     proc.waitFor()              
 
@@ -79,7 +79,7 @@ def hockeyCheck(hockeyApps){
     def json = new JsonSlurper().parseText(proc.in.text)
     def remote_app_id = json[0].app_id
     
-    if(remote_app_id == $it.id){
+    if(remote_app_id == it.id){
       println "Match found"
     }
     else {
