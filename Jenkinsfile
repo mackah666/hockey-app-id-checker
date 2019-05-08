@@ -32,9 +32,11 @@ pipeline {
     stage('Run Checker') {
       steps {
         //hockeyCheckId(hockey_app_id, app_id)
-        androidBuildTypes.each { 
-          println "$it.id: $it.hockeyAppId" 
-          hockeyCheckId($it.hockeyAppId, $it.id)
+        script{
+          androidBuildTypes.each { 
+            println "$it.id: $it.hockeyAppId" 
+            hockeyCheckId($it.hockeyAppId, $it.id)
+          }
         }
       }
     }
