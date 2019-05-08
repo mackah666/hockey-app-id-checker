@@ -34,7 +34,6 @@ pipeline {
         //hockeyCheckId(hockey_app_id, app_id)
         script{
           hockeyApps.each { 
-            println "$it.id: $it.hockeyAppId" 
             hockeyCheckId($it.hockeyAppId, $it.id)
           }
         }
