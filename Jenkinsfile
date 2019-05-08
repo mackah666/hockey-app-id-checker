@@ -33,9 +33,10 @@ pipeline {
       steps {
         //hockeyCheckId(hockey_app_id, app_id)
         script{
-          hockeyApps.each { 
-            hockeyCheckId($it.hockeyAppId, $it.id)
-          }
+          // hockeyApps.each { 
+          //   hockeyCheckId($it.hockeyAppId, $it.id)
+          // }
+          hockeyCheck(hockeyApps)
         }
       }
     }
@@ -44,6 +45,7 @@ pipeline {
 
 
 def hockeyCheckId(String hockeyAppId, appId){
+
   def command = "${env.WORKSPACE}/check_hockeyId.sh ${hockeyAppId}"
   def proc = command.execute()
   proc.waitFor()              
@@ -64,6 +66,27 @@ def hockeyCheckId(String hockeyAppId, appId){
   
 
   println(json[0].app_id)
+}
+
+def hockeyCheck(hockeyApps){
+  hockeyApps.each { 
+    def command = "${env.WORKSPACE}/check_hockeyId.sh $it.hockeyAppId"
+    def proc = command.execute()
+    proc.waitFor()              
+
+    println "Process exit code: ${proc.exitValue()}"
+    def exitcode = proc.exitValue()
+    def json = new JsonSlurper().parseText(proc.in.text)
+    def remote_app_id = json[0].app_id
+    
+    if(remote_app_id == $it.id){
+      println "Match found"
+    }
+    else {
+      error('No match found.')
+    }
+    println(json[0].app_id)
+  }
 }
 
 
