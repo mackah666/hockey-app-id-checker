@@ -82,6 +82,7 @@ def hockeyCheck(hockeyApps){
     if(remote_app_id == it.id){
       println "Match found"
       println(json[0].app_id)
+      println(json[0].title)
     }
     else {
       error('No match found.')
