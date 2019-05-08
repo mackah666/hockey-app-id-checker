@@ -13,7 +13,7 @@ def  hockeyApps  = [
             hockeyAppId : "3fc8a75135c94f89a3b46326d12add6f"
         ],
         [
-            id: 899938,
+            id: 899939,
             hockeyAppId : "0c159c702a6a4ed8a51df28a8dc8b726"
         ]
 ]
