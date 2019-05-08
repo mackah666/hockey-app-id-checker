@@ -3,7 +3,7 @@ import groovy.json.*
 def hockey_app_id = "2439bd963ea84cfca061e8ca1c101d27"
 def app_id = 910760
 
-def app_name = "Go Explore"
+def app_name = "Danger Mouse"
 
 def  hockeyApps  = [
         [
