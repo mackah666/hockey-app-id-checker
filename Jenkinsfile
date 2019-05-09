@@ -1,7 +1,7 @@
 import groovy.json.*
 
-//def app_name = "Danger Mouse"
-def app_name = "Go Explore"
+def app_name = "Danger Mouse"
+//def app_name = "Go Explore"
 
 def  hockeyApps  = [
         [
