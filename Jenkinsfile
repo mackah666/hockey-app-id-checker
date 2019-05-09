@@ -1,6 +1,7 @@
 import groovy.json.*
 
-def app_name = "Danger Mouse"
+//def app_name = "Danger Mouse"
+def app_name = "Go Explore"
 
 def  hockeyApps  = [
         [
@@ -25,16 +26,11 @@ pipeline {
            steps {
             sh "pwd"
                 sh "printenv"
-                //print params
           }
     }  
     stage('Run Checker') {
       steps {
-        //hockeyCheckId(hockey_app_id, app_id)
         script{
-          // hockeyApps.each { 
-          //   hockeyCheckId($it.hockeyAppId, $it.id)
-          // }
           hockeyCheck(hockeyApps, app_name)
         }
       }
