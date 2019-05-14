@@ -1,6 +1,6 @@
 import groovy.json.*
 
-def app_name = "DangerMouse"
+def app_name = "Danger Mouse"
 //def app_name = "GoExplore"
 
 def  hockeyApps  = [
@@ -50,7 +50,7 @@ def hockeyCheck(hockeyApps,appName){
     def json = new JsonSlurper().parseText(proc.in.text)
     def remote_app_id = json[0].app_id
     
-    if(remote_app_id == it.id && json[0].title.contains(appName)){
+    if(json[0].title.contains(appName)){
       println "Match found"
       println(json[0].app_id)
       println(json[0].title)
